@@ -115,8 +115,7 @@ class CartScreen extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold
                               ),
-                                  ),
-                                 
+                                ),
                                 ],
                               ),
                             ),
@@ -140,16 +139,36 @@ class CartScreen extends StatelessWidget {
                           onPressed: (){
                           
                           }, 
-                          child:  Text(
-                        "Add All To Cart",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                ),
+                          child:  Padding(
+                            padding: const EdgeInsets.only(left: 80),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                "Go to Checkout",
+                                style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 40,
+                            ),
+                              Text(
+                                "\$12.96",
+                                 style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                              ),
+                                
+                              )
+                              ],
+                            ),
+                          ),
               ),
               ),
-              ) 
-                ],
+              
+              ],
               ),
                
             ],
