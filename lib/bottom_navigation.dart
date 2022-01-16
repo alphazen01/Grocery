@@ -73,7 +73,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         
         type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor:Colors.white,
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.black,
         selectedIconTheme: IconThemeData(
