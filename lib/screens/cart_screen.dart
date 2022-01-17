@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CartScreen extends StatefulWidget {
   const CartScreen({ Key? key }) : super(key: key);
 
@@ -120,16 +120,7 @@ class _CartScreenState extends State<CartScreen> {
                           children: [
                              IconButton(
                             onPressed: (){}, 
-                            icon:ClipOval(
-                              child: Material(
-                                child: InkWell(
-                                  onTap: (){},
-                                  child: Image.asset(
-                                    "assets/Group 6862.png",
-                                  ),
-                                ),
-                              ),
-                            )
+                            icon:FaIcon(FontAwesomeIcons.times,color: Color(0xffB3B3B3)),
                             ),
                             Text(
                               "\$1.50",

@@ -1,6 +1,8 @@
-import 'package:demo/cart_screen.dart';
-import 'package:demo/favourite.dart';
+import 'package:demo/screens/cart_screen.dart';
+import 'package:demo/screens/favourite.dart';
+import 'package:demo/screens/find_products.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({ Key? key, }) : super(key: key);
@@ -26,11 +28,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
      height: double.infinity,
       color: Colors.blue,
     ),
-     Container(
-       width: double.infinity,
-     height: double.infinity,
-      color: Colors.black,
-    ),
+    FindProducts(),
     CartScreen(),
      FavouriteScreen(),
     Container(
@@ -57,7 +55,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               label: "Explore",
               ),
                BottomNavigationBarItem(
-              icon:Image.asset("assets/Vector (6).png"),
+              icon:FaIcon(FontAwesomeIcons.shoppingCart),
               label: "Cart",
               ),
               BottomNavigationBarItem(
