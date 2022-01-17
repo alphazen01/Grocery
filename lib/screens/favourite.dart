@@ -27,8 +27,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     "330ml, Price "
   ];
   List<Widget>image=[
-    Image.asset("assets/sprite.png",),
-    Image.asset("assets/coke.png",),
+    Image.asset("assets/sprite.png"),
+    Image.asset("assets/coke.png"),
     Image.asset("assets/tree_top.png"),
     Image.asset("assets/cocacola.png"),
     Image.asset("assets/pepsi.png"),
