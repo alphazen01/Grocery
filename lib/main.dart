@@ -13,13 +13,13 @@ void main() {
       debugShowCheckedModeBanner: false,
       // home: CartScreen()
       // home: FavouriteScreen(),
-      // home: NavigationScreen(),
+      home: NavigationScreen(),
       // home: WelcomeScreen(),
       // home: FilterScreen(),
       // home: FindProducts(),
       // home: Beverages(),
       // home: Groceries(),
-      home: SearchScreen(),
+      // home: SearchScreen(),
     )
   );
 }

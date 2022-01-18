@@ -1,6 +1,9 @@
 import 'package:demo/screens/cart_screen.dart';
 import 'package:demo/screens/favourite.dart';
+import 'package:demo/screens/filter.dart';
 import 'package:demo/screens/find_products.dart';
+import 'package:demo/screens/search.dart';
+import 'package:demo/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,19 +26,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
     
   ];
   List<Widget>screens=[
-    Container(
-       width: double.infinity,
-     height: double.infinity,
-      color: Colors.blue,
-    ),
+    SearchScreen(),
     FindProducts(),
     CartScreen(),
-     FavouriteScreen(),
-    Container(
-        width: double.infinity,
-     height: double.infinity,
-      color: Colors.blue,
-    ),
+    FavouriteScreen(),
+    FilterScreen()
     
   ];
   @override
@@ -47,11 +42,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
         items: [
           BottomNavigationBarItem(
              
-             icon: Image.asset("assets/Vector (5).png"),
+             icon:Icon(Icons.store_mall_directory_rounded),
               label: "Shop",
               ),
                BottomNavigationBarItem(
-               icon: Image.asset("assets/Group 3.png"),
+               icon: Icon(Icons.search),
               label: "Explore",
               ),
                BottomNavigationBarItem(

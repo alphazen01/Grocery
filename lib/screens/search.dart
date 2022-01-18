@@ -10,11 +10,11 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
  List<Widget>image=[
-    Image.asset("assets/egg_red.png"),
-    Image.asset("assets/egg_white.png"),
-    Image.asset("assets/pasta.png",),
-    Image.asset("assets/noodles_red.png"),
-    Image.asset("assets/mayonnais.png"),
+    Image.asset("assets/egg_red.png",scale: 1.75,),
+    Image.asset("assets/egg_white.png",scale: 1.75,),
+    Image.asset("assets/pasta.png",scale: 1.60,),
+    Image.asset("assets/noodles_red.png",scale: 1.75,),
+    Image.asset("assets/mayonnais.png",scale: 1.75,),
     Image.asset("assets/noodles_purple.png"),
   ];
 
@@ -99,55 +99,53 @@ class _SearchScreenState extends State<SearchScreen> {
                     
                   ),
                   child:Container(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          image[index],
-                          Text(
-                            "${title[index]}"
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        image[index],
+                        Text(
+                          "${title[index]}"
+                          ,textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700
+                        ),
+                        ),
+                         Text(
+                            "${stitle[index]}"
                             ,textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w700
+                              color: Colors.grey
                           ),
                           ),
-                           Text(
-                              "${stitle[index]}"
-                              ,textAlign: TextAlign.center,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(width: 1,),
+                              Text("${dtitle[index]}",
                               style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey
-                            ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                SizedBox(width: 1,),
-                                Text("${dtitle[index]}",
-                                style: TextStyle(
-                                 fontSize: 18,
-                                 fontWeight: FontWeight.w700
-                                ),
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  width: 50,
-                                  child: ElevatedButton(
-                                    onPressed: (){}, 
-                                    child: Icon(Icons.add),
-                                    style: ElevatedButton.styleFrom(
-                                     primary: Color(0xff53B175),
-                                     shape: RoundedRectangleBorder(
-                                       borderRadius: BorderRadius.circular(17)
-                                     ) 
-                                    ),
+                               fontSize: 18,
+                               fontWeight: FontWeight.w700
+                              ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: ElevatedButton(
+                                  onPressed: (){}, 
+                                  child: Icon(Icons.add),
+                                  style: ElevatedButton.styleFrom(
+                                   primary: Color(0xff53B175),
+                                   shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.circular(17)
+                                   ) 
                                   ),
-                                )
-                              ],
-                            )
-                        ],
-                      ),
+                                ),
+                              )
+                            ],
+                          )
+                      ],
                     ),
                   )
                 );
