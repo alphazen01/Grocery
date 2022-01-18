@@ -9,6 +9,15 @@ class FindProducts extends StatefulWidget {
 
 class _FindProductsState extends State<FindProducts> {
 
+ List<Color>bclrList=[
+    Color(0xff53B175).withOpacity(0.75),
+    Color(0xffF8A44C).withOpacity(0.75),
+    Color(0xffF7A593).withOpacity(0.75),
+    Color(0xffD3B0E0).withOpacity(0.75),
+    Color(0xffFDE598).withOpacity(0.75),
+    Color(0xffB7DFF5).withOpacity(0.75),
+   
+  ];
   List<Color>clrList=[
     Color(0xff53B175).withOpacity(0.10),
     Color(0xffF8A44C).withOpacity(0.10),
@@ -59,14 +68,12 @@ class _FindProductsState extends State<FindProducts> {
               fillColor: Color(0xffF2F2F7),
               filled: true,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(
-                  color: Colors.blue
-                ),
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none
               ),
               focusedBorder:OutlineInputBorder(
                    borderSide:BorderSide(
-                     color: Colors.white,
+                     color: Color(0xffE5E5E5),
                      width: 2
                    ),
                    borderRadius: BorderRadius.circular(20) 
@@ -89,31 +96,38 @@ class _FindProductsState extends State<FindProducts> {
                   mainAxisSpacing: 8
                 ), 
                 itemBuilder: (context,index){
-                  return Container(
-                width: double.infinity,
-                decoration:BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color:clrList[index]
-                ),
-                child:Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      image[index],
-                      Padding(
-                        padding: const EdgeInsets.only(left:20),
-                        child: Text(
-                          "${title[index]}"
-                          ,textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18
-                        ),
-                        ),
+                  return InkWell(
+                    onTap: (){},
+                    child: Container(
+                      width: double.infinity,
+                      decoration:BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color:clrList[index]
+                    ),
+                    child:Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(width:2,color: bclrList[index%clrList.length]),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        image[index],
+                        Padding(
+                          padding: const EdgeInsets.only(left:20),
+                          child: Text(
+                            "${title[index]}"
+                            ,textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18
+                          ),
+                          ),
+                        )
+                      ],
+                    ),
                       )
-                    ],
-                  ),
-                )
-              );
+                    ),
+                  );
                 }
               ),
             ),

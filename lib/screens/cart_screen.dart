@@ -11,7 +11,7 @@ class _CartScreenState extends State<CartScreen> {
 
  List<Widget>image=[
     Image.asset("assets/capcicum.png",),
-    Image.asset("assets/egg_busket.png",),
+    Image.asset("assets/egg_red.png",),
     Image.asset("assets/banana.png"),
     Image.asset("assets/ginger.png"),
   ];
@@ -35,8 +35,9 @@ class _CartScreenState extends State<CartScreen> {
    return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 1,
+          elevation: 0.5,
           centerTitle: true,
+          shadowColor: Colors.grey.withOpacity(0.50),
           title: Text(
             "My Cart",
             style: TextStyle(
@@ -51,8 +52,8 @@ class _CartScreenState extends State<CartScreen> {
               child: ListView.separated(
                 separatorBuilder: (context,int){
                   return Divider(
-                    thickness: 2,
-                    color:Colors.grey.withOpacity(0.50)
+                    thickness: 1,
+                    color:Colors.grey.withOpacity(0.30)
                   );
                 },
                 scrollDirection: Axis.vertical,
@@ -91,10 +92,12 @@ class _CartScreenState extends State<CartScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ClipOval(
-                               child: IconButton(
-                                  onPressed: (){}, 
-                                  icon: Icon(Icons.remove,color: Colors.black),
-                                ),
+                               child: Material(
+                                 child: IconButton(
+                                    onPressed: (){}, 
+                                    icon: Icon(Icons.remove,color: Colors.black),
+                                  ),
+                               ),
                              ),
                               Text(
                                 "1",
@@ -104,10 +107,12 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                               ),
                              ClipOval(
-                               child: IconButton(
-                                  onPressed: (){}, 
-                                  icon: Icon(Icons.add,color: Colors.black),
-                                ),
+                               child: Material(
+                                 child: IconButton(
+                                    onPressed: (){}, 
+                                    icon: Icon(Icons.add,color: Colors.black),
+                                  ),
+                               ),
                              ),
                             ],
                           )
@@ -118,10 +123,14 @@ class _CartScreenState extends State<CartScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                             IconButton(
-                            onPressed: (){}, 
-                            icon:FaIcon(FontAwesomeIcons.times,color: Color(0xffB3B3B3)),
-                            ),
+                             ClipOval(
+                               child: Material(
+                                 child: IconButton(
+                                  onPressed: (){}, 
+                                  icon:Icon(Icons.close),
+                                  ),
+                               ),
+                             ),
                             Text(
                               "\$1.50",
                           style: TextStyle(
@@ -140,46 +149,49 @@ class _CartScreenState extends State<CartScreen> {
             SizedBox(
               height: 20,
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 25),
-              width: double.infinity,
-              height: 67,
-              decoration: BoxDecoration(
-                color:Color(0xff53B175),
-                borderRadius: BorderRadius.circular(19)
-              ),
-              child:  TextButton(
-                    onPressed: (){
-                    
-                    }, 
-                    child:  Padding(
-                      padding: const EdgeInsets.only(left: 80),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                          "Go to Checkout",
-                          style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                        Text(
-                          "\$12.96",
-                           style: TextStyle(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: SizedBox(
+                width:double.infinity,
+                height: 67,
+                child: ElevatedButton(
+                      onPressed: (){},
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff53B175),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                        )
+                      ), 
+                      child:  Padding(
+                        padding: const EdgeInsets.only(left: 80),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                            "Go to Checkout",
+                            style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
+                          ),
                         ),
-                          
-                        )
-                        ],
+                        SizedBox(
+                          width: 40,
+                        ),
+                          Text(
+                            "\$12.96",
+                             style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                          ),
+                            
+                          )
+                          ],
+                        ),
                       ),
-                    ),
-        ),
-        ),
+                      ),
+              ),
+            ),
+        SizedBox(height: 15,)
         
         ],
         ),

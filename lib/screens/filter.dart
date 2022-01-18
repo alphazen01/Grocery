@@ -53,95 +53,102 @@ Map<String,bool>brand={
           ),
         )
       ),
-      body: Column(
-        children: [
-          Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: Text(
-                      "Categories",
-                       style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: Text(
+                        "Categories",
+                         style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700
+                      )
+                      ),
+                    ),
+                    Column(
+                      children: categories.keys.map((ItemName) => CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        
+                        activeColor: Colors.green,
+                        
+                        shape: RoundedRectangleBorder(),
+                        title: Text(ItemName,style: TextStyle(color:categories[ItemName]!
+                        ?Colors.green:Colors.black),),
+                        value: categories[ItemName], 
+                        onChanged: (bool?value){
+                          setState(() {
+                            categories[ItemName]=value!;
+                          });
+                        }
+                      )).toList()
                     )
+                  ],
+                ),
+                  Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: Text(
+                  "Brand",
+                   style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700
+                )
+                ),
+              ),
+              Column(
+                children: brand.keys.map((ItemName) => CheckboxListTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  shape: RoundedRectangleBorder(),
+                  title: Text(ItemName,style: TextStyle(color:brand[ItemName]!
+                        ?Colors.green:Colors.black),),
+                  activeColor: Colors.green,
+                  value: brand[ItemName], 
+                  onChanged: (bool?value){
+                    setState(() {
+                      brand[ItemName]=value!;
+                     
+                    });
+                  }
+                )).toList()
+              )
+            ],
+            ),
+              ],
+            ),
+                Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: SizedBox(
+            width:double.infinity,
+            height: 67,
+            child: ElevatedButton(
+                  onPressed: (){},
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff53B175),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                    )
+                  ), 
+                  child: Text(
+                  "Add All To Cart",
+                  style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
                     ),
                   ),
-                  Column(
-                    children: categories.keys.map((ItemName) => CheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      
-                      activeColor: Colors.green,
-                      
-                      shape: RoundedRectangleBorder(),
-                      title: Text(ItemName,),
-                      value: categories[ItemName], 
-                      onChanged: (bool?value){
-                        setState(() {
-                          categories[ItemName]=value!;
-                        });
-                      }
-                    )).toList()
-                  )
-                ],
-              ),
-                Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: Text(
-                "Brand",
-                 style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w700
-              )
-              ),
-            ),
-            Column(
-              children: brand.keys.map((ItemName) => CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                shape: RoundedRectangleBorder(),
-                title: Text(ItemName),
-                activeColor: Colors.green,
-                value: brand[ItemName], 
-                onChanged: (bool?value){
-                  setState(() {
-                    brand[ItemName]=value!;
-                   
-                  });
-                }
-              )).toList()
-            )
+                  ),
+          ),
+        ),
+          SizedBox(height: 15,)
           ],
-          ),
-            ],
-          ),
-                 Container(
-              margin: EdgeInsets.symmetric(horizontal: 25),
-              width: double.infinity,
-              height: 67,
-              decoration: BoxDecoration(
-                color:Color(0xff53B175),
-                borderRadius: BorderRadius.circular(19)
-              ),
-              child:  TextButton(
-                    onPressed: (){
-                    
-                    }, 
-                    child:  Text(
-                  "Apply Filter",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-          ),
         ),
-        ),
-        ) 
-        ],
       ),
     );
   }

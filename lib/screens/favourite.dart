@@ -37,9 +37,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          elevation: 1,
+          elevation: 0.5,
           centerTitle: true,
           backgroundColor: Colors.white,
+          shadowColor: Colors.grey.withOpacity(0.50),
           title: Text(
             "Favorurite",
             style: TextStyle(
@@ -54,8 +55,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               child: ListView.separated(
                 separatorBuilder: (context,int){
                   return Divider(
-                    thickness: 2,
-                    color:Colors.grey.withOpacity(0.50)
+                    thickness: 1,
+                    color:Colors.grey.withOpacity(0.30)
                   );
                 },
                 scrollDirection: Axis.vertical,
@@ -97,10 +98,14 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold
                         ),
-                            ),
-                            IconButton(
-                            onPressed: (){}, 
-                            icon:  Icon(Icons.arrow_forward_ios,color: Colors.black38,)
+                        ),
+                            ClipOval(
+                              child: Material(
+                                child: IconButton(
+                                onPressed: (){}, 
+                                icon:  Icon(Icons.arrow_forward_ios,color: Colors.black38,)
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -113,27 +118,30 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             SizedBox(
               height: 20,
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 25),
-              width: double.infinity,
-              height: 67,
-              decoration: BoxDecoration(
-                color:Color(0xff53B175),
-                borderRadius: BorderRadius.circular(19)
+           Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: SizedBox(
+                width:double.infinity,
+                height: 67,
+                child: ElevatedButton(
+                      onPressed: (){},
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff53B175),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                        )
+                      ), 
+                      child: Text(
+                      "Add All To Cart",
+                      style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                        ),
+                      ),
+                      ),
               ),
-              child:  TextButton(
-                    onPressed: (){
-                    
-                    }, 
-                    child:  Text(
-                  "Add All To Cart",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-          ),
-        ),
-        ),
-        ) 
+            ),
+            SizedBox(height: 15,)
           ],
         ),
       );
