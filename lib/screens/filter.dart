@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class FilterScreen extends StatefulWidget {
   
@@ -42,16 +42,7 @@ Map<String,bool>brand={
             color: Colors.black
           ),
         ),
-        leading:Padding(
-          padding: const EdgeInsets.only(left: 15,top: 15),
-          child: InkWell(
-            onTap: (){},
-            child: FaIcon(
-              FontAwesomeIcons.times,
-              color:Color(0xff181725)
-            )
-          ),
-        )
+        leading:Icon(Icons.close,color: Colors.black,)
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -108,7 +99,7 @@ Map<String,bool>brand={
                   controlAffinity: ListTileControlAffinity.leading,
                   shape: RoundedRectangleBorder(),
                   title: Text(ItemName,style: TextStyle(color:brand[ItemName]!
-                        ?Colors.green:Colors.black),),
+                  ?Colors.green:Colors.black),),
                   activeColor: Colors.green,
                   value: brand[ItemName], 
                   onChanged: (bool?value){

@@ -8,6 +8,24 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  int dcount=0;
+  int count=0;
+  increaseCount(){
+    setState(() {
+      count++; 
+    });
+   
+  }
+   dcreaseCount(){
+     if (count>0) {
+        setState(() {
+      count--; 
+    });
+     }
+   
+   
+  }
+  
 
  List<Widget>image=[
     Image.asset("assets/capcicum.png",),
@@ -94,13 +112,15 @@ class _CartScreenState extends State<CartScreen> {
                               ClipOval(
                                child: Material(
                                  child: IconButton(
-                                    onPressed: (){}, 
+                                    onPressed: (){
+                                      dcreaseCount();
+                                    }, 
                                     icon: Icon(Icons.remove,color: Colors.black),
                                   ),
                                ),
                              ),
                               Text(
-                                "1",
+                                "$count",
                                  style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500
@@ -109,7 +129,9 @@ class _CartScreenState extends State<CartScreen> {
                              ClipOval(
                                child: Material(
                                  child: IconButton(
-                                    onPressed: (){}, 
+                                    onPressed: (){
+                                      increaseCount();
+                                    }, 
                                     icon: Icon(Icons.add,color: Colors.black),
                                   ),
                                ),

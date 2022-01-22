@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({ Key? key }) : super(key: key);
@@ -10,8 +10,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
  List<Widget>image=[
-    Image.asset("assets/egg_red.png",scale: 1.75,),
-    Image.asset("assets/egg_white.png",scale: 1.75,),
+    Image.asset("assets/egg_red.png"),
+    Image.asset("assets/egg_white.png"),
     Image.asset("assets/pasta.png",scale: 1.60,),
     Image.asset("assets/noodles_red.png",scale: 1.75,),
     Image.asset("assets/mayonnais.png",scale: 1.75,),
@@ -54,13 +54,11 @@ class _SearchScreenState extends State<SearchScreen> {
              TextField(
               decoration: InputDecoration(
                 hintText: "Search Store",
-                fillColor: Color(0xffF2F2F7),
+                fillColor:Color(0xffE5E5E5),
                 filled: true,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(
-                    color: Colors.blue
-                  ),
+                  borderSide: BorderSide.none
                 ),
                 focusedBorder:OutlineInputBorder(
                      borderSide:BorderSide(
@@ -73,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 prefixIcon: Icon(Icons.search,color: Colors.black,),
                 suffixIcon:IconButton(
                 onPressed: (){}, 
-                icon:FaIcon(FontAwesomeIcons.times,color: Color(0xffB3B3B3)),
+                icon:Icon(Icons.close,color: Color(0xffB3B3B3))
             ), 
             ),
             ),
