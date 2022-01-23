@@ -157,7 +157,7 @@ class _CartScreenState extends State<CartScreen> {
                               "\$1.50",
                           style: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.bold
+                          fontWeight: FontWeight.bold,
                         ),
                           ),
                           ],

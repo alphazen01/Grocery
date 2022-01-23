@@ -59,7 +59,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 color: Color(0xffC4C4C4),
                 child: TextField(
                   keyboardType: TextInputType.text,
-                 obscureText: true,
+                 obscureText: !isHiddenPassword,
                  obscuringCharacter: "•",
                  decoration: InputDecoration(
                    hintText:"Enter your Password", 
@@ -84,18 +84,20 @@ class _LogInScreenState extends State<LogInScreen> {
                        });
                      }, 
                      icon:Icon(
-                    isHiddenPassword? Icons.visibility_off_rounded
-                    :Icons.visibility,
+                    isHiddenPassword? Icons.visibility
+                    :Icons.visibility_off_rounded,
                     )
                   )
                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 220),
-                child: Text(
-                  "Forgot Password?",style: TextStyle(fontSize: 16),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Forgot Password?",style: TextStyle(fontSize: 16),
+                  ),
+                ],
               ),
               SizedBox(
             width:double.infinity,

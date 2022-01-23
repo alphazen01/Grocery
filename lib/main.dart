@@ -1,5 +1,7 @@
 import 'package:demo/bottom_navigation.dart';
+import 'package:demo/carosel.dart';
 import 'package:demo/login.dart';
+import 'package:demo/otp.dart';
 import 'package:demo/screens/beverage.dart';
 import 'package:demo/screens/filter.dart';
 import 'package:demo/screens/find_products.dart';
@@ -21,7 +23,9 @@ void main() {
       // home: Beverages(),
       // home: Groceries(),
       // home: SearchScreen(),
-      home: LogInScreen(),
+      // home: LogInScreen(),
+      // home: OtpScreen(),
+      home: CaroselScreen(),
     )
   );
 }
