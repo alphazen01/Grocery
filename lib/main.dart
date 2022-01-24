@@ -26,6 +26,7 @@ void main() {
       // home: LogInScreen(),
       // home: OtpScreen(),
       home: CaroselScreen(),
+      
     )
   );
 }
