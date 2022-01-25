@@ -259,7 +259,18 @@ class _CaroselScreenState extends State<CaroselScreen> {
             width:double.infinity,
             height: 67,
             child: ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(40),
+                    ),
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  context: context,
+                  builder: (context)=>buildSheet(),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 primary: Color(0xff53B175),
                 shape: RoundedRectangleBorder(
@@ -283,4 +294,8 @@ class _CaroselScreenState extends State<CaroselScreen> {
      ),
     );
   }
+
+  Widget buildSheet()=>Container(
+
+  );
 }
