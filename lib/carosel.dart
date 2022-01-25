@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:demo/indicator.dart';
 import 'package:demo/login.dart';
 import 'package:demo/otp.dart';
 import 'package:demo/screens/cart_screen.dart';
@@ -13,15 +14,15 @@ class CaroselScreen extends StatefulWidget {
 }
 
 class _CaroselScreenState extends State<CaroselScreen> {
+  bool isTap1=false;
+  bool isTap2=false;
+  bool color=true;
  
- int pageIndex=0;
-
-  List<Widget> _demo=[
-    Container(height: 300,color: Colors.amber),
-              Container(height: 300,color: Colors.black),
-              Container(height: 300,color: Colors.blue),
-              Container(height: 300,color: Colors.green),
-  ];
+ final List<String>imageList=[
+   "assets/apple.png",
+   "assets/apple.png",
+   "assets/apple.png",
+ ];
    int dcount=0;
 
   int count=0;
@@ -34,11 +35,11 @@ class _CaroselScreenState extends State<CaroselScreen> {
   }
 
    dcreaseCount(){
-     if (count>0) {
+
         setState(() {
       count--; 
     });
-     }
+     
    
    
   }
@@ -60,68 +61,25 @@ class _CaroselScreenState extends State<CaroselScreen> {
        padding: const EdgeInsets.symmetric(horizontal: 25),
        child: SingleChildScrollView(
          child: Column(
-           mainAxisAlignment: MainAxisAlignment.spaceAround,
            crossAxisAlignment: CrossAxisAlignment.start,
-           children:<Widget> [
-            //  CarouselSlider(
-            //     options: CarouselOptions(height: 400.0),
-                
-            //     items: [1,2,3,4,5].map((i) {
-            //       return Builder(
-            //         builder: (BuildContext context) {
-            //           return Container(
-            //             width: MediaQuery.of(context).size.width,
-            //             child: Image.asset("assets/apple.png",fit: BoxFit.fitWidth,)
-            //           );
-            //         },
-            //       );
-            //     }).toList(),
-            //   ),
-
-               TabBar(
-              isScrollable: true,
-              unselectedLabelColor: Colors.redAccent,
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicator: BoxDecoration(
-              gradient: LinearGradient(
-              colors: [Colors.redAccent, Colors.orangeAccent]
+           children: [
+             CarouselSlider(
+                items: [1,2,3,4,5].map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.asset("assets/apple.png",fit: BoxFit.fitWidth,)
+                      );
+                    },
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                 autoPlay: false,
+                 enlargeCenterPage: false 
+                ),
               ),
-              // borderRadius: BorderRadius.circular(50),
-              color: Colors.redAccent
-              ),
-              
-            tabs: [
-             Tab(
-               child: Text("Rice"),
-             ), 
-              Tab(
-               child: Text("Bread"),
-             ),   
-              Tab(
-               child: Text("Fast-Food"),
-             ),   
-              Tab(
-               child: Text("Non-Veg"),
-             ),
-              
-         ]
-        ),
-        Expanded(
-          child: TabBarView(
-           
-            children: [
-            LogInScreen(),
-             OtpScreen(),
-             WelcomeScreen(),
-             CartScreen()
-            ]
-            ),
-        ),
-
-
-
-
-             
+               CustomIndicator(imageList: imageList,),
              Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
@@ -153,8 +111,14 @@ class _CaroselScreenState extends State<CaroselScreen> {
                         child: IconButton(
                           onPressed: (){
                             dcreaseCount();
+                             setState(() {
+                               isTap1=true;
+                               isTap2=false;
+                            }); 
+                            
+                               
                           }, 
-                          icon: Icon(Icons.remove,color: Colors.black),
+                          icon: Icon(Icons.remove,color:isTap1? Colors.green: Colors.black)
                         ),
                       ),
                     ),
@@ -173,8 +137,12 @@ class _CaroselScreenState extends State<CaroselScreen> {
                         child: IconButton(
                           onPressed: (){
                             increaseCount();
+                            setState(() {
+                              isTap2=true;
+                              isTap1=false;
+                            });
                           }, 
-                          icon: Icon(Icons.add,color: Colors.black),
+                          icon: Icon(Icons.add,color:isTap2? Colors.green:Colors.black),
                         ),
                       ),
                     ),
@@ -262,6 +230,7 @@ class _CaroselScreenState extends State<CaroselScreen> {
             Row(
               children: [
                RatingBar.builder(
+              itemSize: 25,
               initialRating: 3,
               minRating: 1,
               direction: Axis.horizontal,
@@ -270,19 +239,19 @@ class _CaroselScreenState extends State<CaroselScreen> {
               itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
               itemBuilder: (context, _) => Icon(
                 Icons.star,size: 5,
-                color: Colors.amber,
+                color: Color(0xffF3603F),
               ),
               onRatingUpdate: (rating) {
                 print(rating);
               },
             ),
-              
-              ]
-            ),
             IconButton(
-              onPressed: (){}, 
-              icon: Icon(Icons.arrow_forward_ios,)
-              )
+            onPressed: (){}, 
+            icon: Icon(Icons.arrow_forward_ios,)
+            ) 
+            ]
+            ),
+            
               ],
              ),
              SizedBox(height: 10,),
