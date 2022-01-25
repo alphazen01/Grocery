@@ -1,3 +1,4 @@
+import 'package:demo/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CartScreen extends StatefulWidget {
@@ -8,7 +9,9 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  int dcount=0;
+  bool isTap1=false;
+  bool isTap2=false;
+  bool color=true;
   int count=0;
   increaseCount(){
     setState(() {
@@ -114,8 +117,12 @@ class _CartScreenState extends State<CartScreen> {
                                  child: IconButton(
                                     onPressed: (){
                                       dcreaseCount();
+                                      setState(() {
+                                        isTap1=true;
+                                        isTap2=false;
+                                      });
                                     }, 
-                                    icon: Icon(Icons.remove,color: Colors.black),
+                                    icon: Icon(Icons.remove,color:isTap1?Colors.green: Colors.black),
                                   ),
                                ),
                              ),
@@ -131,8 +138,12 @@ class _CartScreenState extends State<CartScreen> {
                                  child: IconButton(
                                     onPressed: (){
                                       increaseCount();
+                                      setState(() {
+                                        isTap1=false;
+                                        isTap2=true;
+                                      });
                                     }, 
-                                    icon: Icon(Icons.add,color: Colors.black),
+                                    icon: Icon(Icons.add,color:isTap2?Colors.green: Colors.black),
                                   ),
                                ),
                              ),
@@ -177,7 +188,19 @@ class _CartScreenState extends State<CartScreen> {
                 width:double.infinity,
                 height: 67,
                 child: ElevatedButton(
-                      onPressed: (){},
+                onPressed: (){
+                  showModalBottomSheet(
+                  isDismissible: false,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(40),
+                    ),
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  context: context,
+                  builder: (context)=>buildSheet(),
+                );
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xff53B175),
                         shape: RoundedRectangleBorder(
@@ -219,4 +242,8 @@ class _CartScreenState extends State<CartScreen> {
         ),
       );
   }
+   Widget buildSheet()=>SingleChildScrollView(
+     child: CustomBottomSheet(),
+   );
 }
+
