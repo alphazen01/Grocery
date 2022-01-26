@@ -138,10 +138,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       fontSize: 18,
                         ),
                       ),
-                      ),
+                  ),
               ),
             ),
-            SizedBox(height: 15,)
+            SizedBox(height: 25,)
           ],
         ),
       );
