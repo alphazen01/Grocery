@@ -1,3 +1,4 @@
+import 'package:demo/account.dart';
 import 'package:demo/screens/cart_screen.dart';
 import 'package:demo/screens/favourite.dart';
 import 'package:demo/screens/filter.dart';
@@ -30,7 +31,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     FindProducts(),
     CartScreen(),
     FavouriteScreen(),
-    FilterScreen()
+    AccountScreen()
     
   ];
   @override

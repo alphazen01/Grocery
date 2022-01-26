@@ -1,4 +1,4 @@
-import 'package:demo/bottom_sheet.dart';
+import 'package:demo/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CartScreen extends StatefulWidget {
