@@ -1,10 +1,11 @@
-import 'package:demo/account.dart';
+import 'package:demo/screens/welcome/account.dart';
+import 'package:demo/home.dart';
 import 'package:demo/screens/cart_screen.dart';
 import 'package:demo/screens/favourite.dart';
 import 'package:demo/screens/filter.dart';
 import 'package:demo/screens/find_products.dart';
 import 'package:demo/screens/search.dart';
-import 'package:demo/welcome.dart';
+import 'package:demo/screens/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -27,7 +28,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     
   ];
   List<Widget>screens=[
-    SearchScreen(),
+    HomeScreen(),
     FindProducts(),
     CartScreen(),
     FavouriteScreen(),

@@ -67,12 +67,17 @@ class _SearchScreenState extends State<SearchScreen> {
                      ),
                      borderRadius: BorderRadius.circular(20) 
                      ), 
-                 
-                prefixIcon: Icon(Icons.search,color: Colors.black,),
-                suffixIcon:IconButton(
-                onPressed: (){}, 
-                icon:Icon(Icons.close,color: Color(0xffB3B3B3))
-            ), 
+                prefixIcon: Icon(
+                Icons.search,color: Colors.black,
+                ),
+                suffixIcon:ClipOval(
+                  child: Material(
+                    child: IconButton(
+                    onPressed: (){}, 
+                    icon:Icon(Icons.close,color: Color(0xffB3B3B3))
+                    ),
+                  ),
+                ), 
             ),
             ),
             SizedBox(height: 20,),

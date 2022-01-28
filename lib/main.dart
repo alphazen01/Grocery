@@ -1,6 +1,7 @@
 import 'package:demo/account.dart';
 import 'package:demo/bottom_navigation.dart';
 import 'package:demo/carosel.dart';
+import 'package:demo/home.dart';
 import 'package:demo/login.dart';
 import 'package:demo/number.dart';
 import 'package:demo/otp.dart';
@@ -8,7 +9,6 @@ import 'package:demo/screens/beverage.dart';
 import 'package:demo/screens/cart_screen.dart';
 import 'package:demo/screens/filter.dart';
 import 'package:demo/screens/find_products.dart';
-import 'package:demo/screens/groceries.dart';
 import 'package:demo/screens/search.dart';
 import 'package:demo/sign_in.dart';
 import 'package:demo/welcome.dart';
@@ -25,7 +25,7 @@ void main() {
       // home: FilterScreen(),
       // home: FindProducts(),
       // home: Beverages(),
-      // home: Groceries(),
+      // home: HomeScreen(),
       // home: SearchScreen(),
       // home: LogInScreen(),
       // home: OtpScreen(),
