@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:demo/indicator.dart';
-import 'package:demo/login.dart';
+import 'package:demo/widgets/indicator.dart';
+import 'package:demo/screens/welcome/login.dart';
 import 'package:demo/otp.dart';
 import 'package:demo/screens/cart_screen.dart';
-import 'package:demo/welcome.dart';
+import 'package:demo/screens/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
