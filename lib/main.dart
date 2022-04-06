@@ -1,40 +1,85 @@
-import 'package:demo/account.dart';
-import 'package:demo/bottom_navigation.dart';
-import 'package:demo/carosel.dart';
-import 'package:demo/home.dart';
-import 'package:demo/login.dart';
-import 'package:demo/number.dart';
-import 'package:demo/otp.dart';
-import 'package:demo/screens/beverage.dart';
-import 'package:demo/screens/cart_screen.dart';
-import 'package:demo/screens/filter.dart';
-import 'package:demo/screens/find_products.dart';
-import 'package:demo/screens/search.dart';
-import 'package:demo/sign_in.dart';
-import 'package:demo/welcome.dart';
+import 'package:demo/controller/home_controller.dart';
+import 'package:demo/screens/profile/account.dart';
+import 'package:demo/sign_up.dart';
+import 'package:demo/widgets/bottom_navigation.dart';
+import 'package:demo/widgets/carosel.dart';
+import 'package:demo/screens/products/home.dart';
+import 'package:demo/screens/welcome/login.dart';
+import 'package:demo/screens/profile/number.dart';
+import 'package:demo/screens/profile/otp.dart';
+import 'package:demo/screens/products/beverage.dart';
+import 'package:demo/screens/products/cart_screen.dart';
+import 'package:demo/screens/products/filter.dart';
+import 'package:demo/screens/products/find_products.dart';
+import 'package:demo/screens/products/search.dart';
+import 'package:demo/screens/welcome/sign_in.dart';
+import 'package:demo/screens/welcome/welcome.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main()async {
+ WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.blue, // navigation bar color
+    statusBarColor: Colors.blue, // status bar color
+  ));
   runApp(
-    MaterialApp(
+    MyApp()
+  );
+}
+class MyApp extends StatelessWidget {
+  const MyApp({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      
+      providers: [
+        ChangeNotifierProvider<HomeController>(
+          create: (BuildContext context) {
+            return HomeController();
+          })
+          
+      ],
+      
+    
+      child: CustomApp()
+      );
+  }
+}
+
+class CustomApp extends StatelessWidget {
+  const CustomApp({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: CartScreen()
       // home: FavouriteScreen(),
-      home: NavigationScreen(),
+      // home: NavigationScreen(),
       // home: WelcomeScreen(),
       // home: FilterScreen(),
       // home: FindProducts(),
       // home: Beverages(),
-      // home: HomeScreen(),
+      home: HomeScreen(),
       // home: SearchScreen(),
       // home: LogInScreen(),
       // home: OtpScreen(),
+      
       // home: CaroselScreen(),
       // home: AccountScreen(),
       // home: SignInScreen(),
       // home: NumberScreen(),
+      // home: SignUp(),
+      // home: FilterScreen(),
       
-    )
-  );
+    );
+  }
 }
 

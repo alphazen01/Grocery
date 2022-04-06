@@ -29,7 +29,7 @@ class AccountScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold( 
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
           child: Column(
             children: [
               Row(

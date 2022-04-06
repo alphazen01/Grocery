@@ -1,4 +1,9 @@
+import 'package:demo/screens/products/home.dart';
+import 'package:demo/sign_up.dart';
+import 'package:demo/widgets/bottom_navigation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LogInScreen extends StatefulWidget {
  
@@ -7,7 +12,41 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  bool isHiddenPassword=true;
+  bool isLoading=false;
+  bool isHiddenPassword=false;
+   TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  Future signIn() async {
+    setState(() {
+      isLoading=true;
+    });
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+      email: _emailController.text, 
+      password: _passwordController.text
+      );
+      var authCredential = userCredential.user;
+      print(authCredential!.uid);
+
+      if (authCredential.uid.isNotEmpty) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => NavigationScreen()));
+      } else {
+        Fluttertoast.showToast(msg: "Something is Wrong");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Fluttertoast.showToast(msg: 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Fluttertoast.showToast(msg: 'Wrong password provided for that user.');
+      }
+    } catch (e) {
+      print(e);
+    }
+    isLoading=false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +73,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 elevation: 1,
                 color: Color(0xffC4C4C4),
                 child: TextField(
+                  controller: _emailController,
                  decoration: InputDecoration(
                    hintText:"Enter your name", 
                    labelText: "Email",hintStyle: TextStyle(fontSize: 16),
@@ -58,6 +98,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 elevation: 1,
                 color: Color(0xffC4C4C4),
                 child: TextField(
+                  controller: _passwordController,
                   keyboardType: TextInputType.text,
                  obscureText: !isHiddenPassword,
                  obscuringCharacter: "•",
@@ -99,32 +140,67 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                 ],
               ),
+              // isLoading
+              //       ? CircularProgressIndicator()
+              //       : Container(
+              //           width: double.infinity,
+              //           height: 48,
+              //           decoration: BoxDecoration(
+              //               color: Colors.black,
+              //               borderRadius: BorderRadius.circular(10)),
+              //           child: TextButton(
+              //             onPressed: () {
+              //               signIn();
+              //             },
+              //             child: Text(
+              //               "Sign up",
+              //               style: TextStyle(
+              //                 color: Colors.white,
+              //                 fontSize: 17,
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+
+
+
+
+
+
+             isLoading?Center(child: CircularProgressIndicator()):
               SizedBox(
             width:double.infinity,
             height: 67,
-            child: ElevatedButton(
-                  onPressed: (){},
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff53B175),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)
-                    )
-                  ), 
-                  child: Text(
-                  "Log In",
-                  style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
+            child: Container(
+               child: ElevatedButton(
+                    onPressed: (){
+                      signIn();
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary:Color(0xff53B175),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      )
+                    ), 
+                    child: Text(
+                    "Log In",
+                    style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                      ),
                     ),
-                  ),
-                  ),
+                    ),
+             ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don’t have an account?"),
                     TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUp()));
+                      }, 
                       child: Text(
                       "Singup",style: TextStyle(color: Color(0xff53B175),
                       fontSize: 20
