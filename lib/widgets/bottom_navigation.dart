@@ -1,10 +1,10 @@
-import 'package:demo/screens/welcome/account.dart';
-import 'package:demo/home.dart';
-import 'package:demo/screens/cart_screen.dart';
-import 'package:demo/screens/favourite.dart';
-import 'package:demo/screens/filter.dart';
-import 'package:demo/screens/find_products.dart';
-import 'package:demo/screens/search.dart';
+import 'package:demo/screens/profile/account.dart';
+import 'package:demo/screens/products/home.dart';
+import 'package:demo/screens/products/cart_screen.dart';
+import 'package:demo/screens/products/favourite.dart';
+import 'package:demo/screens/products/filter.dart';
+import 'package:demo/screens/products/find_products.dart';
+import 'package:demo/screens/products/search.dart';
 import 'package:demo/screens/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +17,7 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  int selectedIndex=3;
+  int selectedIndex=0;
   
   List<Color>clr=[
     Colors.red,
