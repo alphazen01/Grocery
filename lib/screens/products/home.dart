@@ -113,35 +113,35 @@ class _HomeScreenState extends State<HomeScreen> {
                            ),
                            child:Column(
                                         
-                                      children: [
-                                        // image[index],
-                                        Expanded(child: Image.network(homeController.products[index].image,fit: BoxFit.cover,)),
-                                        SizedBox(height: 6,),
-                                        Text(
-                                          // "${title[index]}"
-                                          homeController.products[index].name
-                                          ,textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700
-                                        ),
-                                        ),
-                                          Text(
-                                            // "${stitle[index]}"
-                                            homeController.products[index].price.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.grey
-                                          ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                            children: [
+                        children: [
+                          // image[index],
+                          Expanded(child: Image.network(homeController.products[index].image,)),
+                          SizedBox(height: 6,),
+                          Text(
+                            // "${title[index]}"
+                            homeController.products[index].name
+                            ,textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700
+                          ),
+                          ),
+                            Text(
+                              // "${stitle[index]}"
+                              "\$ ${ homeController.products[index].price.toString()}" ,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey
+                            ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
                             SizedBox(width: 1,),
                             Text(
                               // "${dtitle[index]}"
-                              "ksujydf",
+                              homeController.products[index].quantity,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700
@@ -161,9 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             )
-                                                 ],
-                                               )
-                                           ],
+                              ],
+                            )
+                        ],
                            )
                          ),
                   );
