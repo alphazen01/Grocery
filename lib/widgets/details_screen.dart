@@ -1,22 +1,46 @@
+
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/models/product_model.dart';
 import 'package:demo/widgets/indicator.dart';
-import 'package:demo/screens/welcome/login.dart';
-import 'package:demo/screens/profile/otp.dart';
-import 'package:demo/screens/products/cart_screen.dart';
-import 'package:demo/screens/welcome/welcome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class CaroselScreen extends StatefulWidget {
- 
+class DetailsScreen extends StatefulWidget {
+  final ProductModel product;
+  const DetailsScreen({ Key? key,required this.product }) : super(key: key);
+
   @override
-  State<CaroselScreen> createState() => _CaroselScreenState();
+  State<DetailsScreen> createState() => _DetailsScreenState();
 }
 
-class _CaroselScreenState extends State<CaroselScreen> {
-  bool isTap1=false;
+class _DetailsScreenState extends State<DetailsScreen> {
+ bool isTap1=false;
   bool isTap2=false;
   bool color=true;
+
+
+Future addToFavourite()async{
+    final FirebaseAuth auth=FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionRef=FirebaseFirestore.instance
+    .collection("users-favourite-items");
+    return collectionRef.doc(currentUser!.email).collection("items").doc().set(
+      {
+        "name":widget.product.name,
+        "price":widget.product.price,
+        "image":widget.product.image,
+      }
+    ).then((value) => print("added to favourite"));
+   
+  }
+
+
+
+
  
  final List<String>imageList=[
    "assets/apple.png",
@@ -35,10 +59,12 @@ class _CaroselScreenState extends State<CaroselScreen> {
   }
 
    dcreaseCount(){
-
-        setState(() {
+   if (count>0) {
+       setState(() {
       count--; 
-    });
+    }); 
+   }
+     
      
    
    
@@ -53,7 +79,9 @@ class _CaroselScreenState extends State<CaroselScreen> {
        elevation: 0,
        backgroundColor: Color(0xffC4C4C4),
        leading: IconButton(
-         onPressed: (){}, 
+         onPressed: (){
+           Navigator.pop(context);
+         }, 
          icon: Icon(Icons.arrow_back_ios,color: Colors.black,)
       ),
      ),
@@ -67,15 +95,11 @@ class _CaroselScreenState extends State<CaroselScreen> {
                 items: [1,2,3,4,5].map((i) {
                   return Builder(
                     builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Image.asset("assets/apple.png",fit: BoxFit.fitWidth,)
-                      );
+                      return Image.network(widget.product.image,fit: BoxFit.contain,);
                     },
                   );
                 }).toList(),
                 options: CarouselOptions(
-                 autoPlay: false,
                  enlargeCenterPage: false 
                 ),
               ),
@@ -84,18 +108,55 @@ class _CaroselScreenState extends State<CaroselScreen> {
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
                  Text(
-              "Naturel Red Apple",style: TextStyle(
+              widget.product.name,style: TextStyle(
               fontSize: 24, 
               ),
               ),
-              IconButton(
-                onPressed: (){}, 
-                icon: Icon(Icons.favorite_border)
+             
+
+
+                 StreamBuilder(
+            stream: FirebaseFirestore.instance.collection("users-favourite-items")
+            .doc(FirebaseAuth.instance.currentUser!.email)
+                .collection("items").where("name",isEqualTo: widget.product.name).snapshots(),
+            builder: (BuildContext context, AsyncSnapshot snapshot){
+              if(snapshot.data==null){
+                return Text("");
+              }
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child:  IconButton(
+                onPressed: (){
+                if (snapshot.data.docs.length==0) {
+                  addToFavourite();
+                } else {
+                  Fluttertoast.showToast(msg: "Already added to favourite");
+                
+                }
+               
+                }, 
+                icon:snapshot.data.docs.length==0?
+                 Icon(Icons.favorite_border):Icon(Icons.favorite)
                 )
+              );
+            },
+
+          ),
+
+
+
+
+
+
+
+
+
+
+
               ],
              ),
               Text(
-              "1kg, Price",style: TextStyle(
+              widget.product.quantity,style: TextStyle(
               fontSize: 24,
               color: Color(0xff7C7C7C) 
               ),
@@ -149,7 +210,7 @@ class _CaroselScreenState extends State<CaroselScreen> {
                 ],
                 ),
                  Text(
-                "\$4.99",
+                "\$ ${widget.product.price.toString()}",
                 style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -161,7 +222,7 @@ class _CaroselScreenState extends State<CaroselScreen> {
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
                  Text(
-            "Product Detail",
+            "Product Details",
             style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -269,7 +330,7 @@ class _CaroselScreenState extends State<CaroselScreen> {
                 )
               ), 
               child: Text(
-              "Add To Basket",
+              "Add To Cart",
               style: TextStyle(
               color: Colors.white,
               fontSize: 18,
