@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/widgets/custom_alert.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteScreen extends StatefulWidget {
@@ -6,37 +9,12 @@ class FavouriteScreen extends StatefulWidget {
   @override
   State<FavouriteScreen> createState() => _FavouriteScreenState();
 }
-//  Sprite Can,
-//   Diet Coke,
-//   Apple & Grape Juice,
-//   Coca Cola Can,
-//   Pepsi Can 
 class _FavouriteScreenState extends State<FavouriteScreen> {
-  List<String>title=[
-    "Sprite Can",
-    "Diet Coke",
-    "Apple & Grape Juice",
-    "Coca Cola Can",
-    "Pepsi Can "
-  ];
-   List<String>stitle=[
-    "325ml, Price",
-    "355ml, Price",
-    "2L, Price",
-    "325ml, Price",
-    "330ml, Price "
-  ];
-  List<Widget>image=[
-    Image.asset("assets/sprite.png"),
-    Image.asset("assets/coke.png"),
-    Image.asset("assets/tree_top.png"),
-    Image.asset("assets/cocacola.png"),
-    Image.asset("assets/pepsi.png"),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+       appBar: AppBar(
           elevation: 0.5,
           centerTitle: true,
           backgroundColor: Colors.white,
@@ -49,101 +27,57 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context,int){
-                  return Divider(
-                    thickness: 1,
-                    color:Colors.grey.withOpacity(0.30)
-                  );
-                },
-                scrollDirection: Axis.vertical,
-                itemCount: title.length,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext, int index){
-                  return SizedBox(
-                    height: 100,
-                    child: ListTile(
-                      leading: Container(
-                        height: double.infinity,
-                        child: image[index]
-                      ),
-                      minLeadingWidth: 75,
-                      
-                      title: Text(
-                        "${title[index]}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      subtitle: Text(
-                        "${stitle[index]}",
-                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500
-                        ),
-                        ),
-                        
-                      trailing: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "\$1.50",
-                          style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
-                        ),
-                            ClipOval(
-                              child: Material(
-                                child: IconButton(
-                                onPressed: (){}, 
-                                icon:  Icon(Icons.arrow_forward_ios,color: Colors.black38,)
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: SizedBox(
-                width:double.infinity,
-                height: 67,
-                child: ElevatedButton(
-                      onPressed: (){},
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xff53B175),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        )
-                      ), 
-                      child: Text(
-                      "Add All To Cart",
-                      style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                        ),
-                      ),
+       body:SafeArea(
+        child: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("users-favourite-items")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("items").snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+
+          if(snapshot.hasError){
+            return Center(child: Text("something is wrong"));
+          }
+          return ListView.builder(
+            itemCount:snapshot.data==null?0: snapshot.data!.docs.length,
+            itemBuilder: ( context,index){
+            
+              DocumentSnapshot documentSnapshot=snapshot.data!.docs[index];
+              return Card(
+                elevation: 2,
+                child: ListTile(
+                  leading: Image.network(documentSnapshot["image"]),
+                  // leading: Text(documentSnapshot["name"]),
+                  title:Text(documentSnapshot["name"]),
+                  subtitle:  Text("\$ ${documentSnapshot["price"]}",
+                  style: TextStyle(color: Colors.red),), 
+                
+                  trailing: GestureDetector(
+                    onTap: (){
+                      showDialog(
+                       barrierDismissible: false,
+                      context: context, 
+                      builder: (BuildContext context){
+                        return CustomAlert(
+                       onTap: (){
+                        FirebaseFirestore.instance.collection("users-favourite-items")
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .collection("items").doc(documentSnapshot.id).delete();
+                       },
+                        );
+                      }
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.red,
+                    child: Icon(Icons.remove_circle)),
                   ),
-              ),
-            ),
-            SizedBox(height: 25,)
-          ],
-        ),
+                ),
+              );
+            }
+          );
+        },
+      )
+      )
       );
   }
 }

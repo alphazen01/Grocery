@@ -33,7 +33,6 @@ class _CustomIndicatorState extends State<CustomIndicator> {
               reverse: false,
               // autoPlayInterval: Duration(seconds: 1),
               scrollDirection: Axis.horizontal,
-              autoPlay: true,
               enlargeCenterPage: true,
               aspectRatio: 2.0,
               onPageChanged: (index, reason) {

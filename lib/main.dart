@@ -1,8 +1,9 @@
 import 'package:demo/controller/home_controller.dart';
+import 'package:demo/models/product_model.dart';
 import 'package:demo/screens/profile/account.dart';
 import 'package:demo/sign_up.dart';
 import 'package:demo/widgets/bottom_navigation.dart';
-import 'package:demo/widgets/carosel.dart';
+import 'package:demo/widgets/details_screen.dart';
 import 'package:demo/screens/products/home.dart';
 import 'package:demo/screens/welcome/login.dart';
 import 'package:demo/screens/profile/number.dart';
@@ -62,22 +63,21 @@ class CustomApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: CartScreen()
       // home: FavouriteScreen(),
-      // home: NavigationScreen(),
+      home: NavigationScreen(),
       // home: WelcomeScreen(),
       // home: FilterScreen(),
       // home: FindProducts(),
       // home: Beverages(),
-      home: HomeScreen(),
+      // home: HomeScreen(),
       // home: SearchScreen(),
       // home: LogInScreen(),
       // home: OtpScreen(),
-      
-      // home: CaroselScreen(),
       // home: AccountScreen(),
       // home: SignInScreen(),
       // home: NumberScreen(),
       // home: SignUp(),
       // home: FilterScreen(),
+      // home: HomeScreen()
       
     );
   }

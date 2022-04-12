@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:demo/controller/home_controller.dart';
+import 'package:demo/widgets/details_screen.dart';
 import 'package:demo/widgets/indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -102,70 +103,75 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: 8
                          ), 
                          itemBuilder: (BuildContext,index){
-                  return LayoutBuilder(
-                    builder: (context, constraints) => 
-                     Container(
-                       height: constraints.maxHeight,
-                           width: double.infinity,
-                           decoration:BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(color: Colors.black.withOpacity(0.1))
-                           ),
-                           child:Column(
-                                        
-                        children: [
-                          // image[index],
-                          Expanded(child: Image.network(homeController.products[index].image,)),
-                          SizedBox(height: 6,),
-                          Text(
-                            // "${title[index]}"
-                            homeController.products[index].name
-                            ,textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700
-                          ),
-                          ),
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>DetailsScreen(product: homeController.products[index])));
+                    },
+                    child: LayoutBuilder(
+                      builder: (context, constraints) => 
+                       Container(
+                         height: constraints.maxHeight,
+                             width: double.infinity,
+                             decoration:BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: Colors.black.withOpacity(0.1))
+                             ),
+                             child:Column(
+                                          
+                          children: [
+                            // image[index],
+                            Expanded(child: Image.network(homeController.products[index].image,)),
+                            SizedBox(height: 6,),
                             Text(
-                              // "${stitle[index]}"
-                              "\$ ${ homeController.products[index].price.toString()}" ,
-                              textAlign: TextAlign.center,
+                              // "${title[index]}"
+                              homeController.products[index].name
+                              ,textAlign: TextAlign.center,
                               style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.grey
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700
                             ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                            SizedBox(width: 1,),
-                            Text(
-                              // "${dtitle[index]}"
-                              homeController.products[index].quantity,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700
-                            ),
-                            ),
-                            SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: ElevatedButton(
-                                onPressed: (){}, 
-                                child: Icon(Icons.add),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff53B175),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17)
-                                  ) 
-                                ),
+                              Text(
+                                // "${stitle[index]}"
+                                "\$ ${ homeController.products[index].price.toString()}" ,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey
                               ),
-                            )
-                              ],
-                            )
-                        ],
-                           )
-                         ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                              SizedBox(width: 1,),
+                              Text(
+                                // "${dtitle[index]}"
+                                homeController.products[index].quantity,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700
+                              ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: ElevatedButton(
+                                  onPressed: (){}, 
+                                  child: Icon(Icons.add),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff53B175),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(17)
+                                    ) 
+                                  ),
+                                ),
+                              )
+                                ],
+                              )
+                          ],
+                             )
+                           ),
+                    ),
                   );
                          }
                        );
